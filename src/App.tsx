@@ -2,6 +2,8 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import { invoke } from "@tauri-apps/api/core";
 import "./App.css";
+import { window } from "@tauri-apps/api";
+
 
 function App() {
   const [greetMsg, setGreetMsg] = useState("");
@@ -10,6 +12,11 @@ function App() {
   async function greet() {
     // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
     setGreetMsg(await invoke("greet", { name }));
+  }
+
+  function myCustomCommand() {
+    const invoke = window.__TAURI__.core.invoke;
+    invoke("my_custom_command");
   }
 
   return (
@@ -28,6 +35,7 @@ function App() {
         </a>
       </div>
       <p>Click on the Tauri, Vite, and React logos to learn more.</p>
+      <button onClick={myCustomCommand}>my_custom_command</button>
 
       <form
         className="row"
