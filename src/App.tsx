@@ -2,7 +2,6 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import { invoke } from "@tauri-apps/api/core";
 import "./App.css";
-import { window } from "@tauri-apps/api";
 
 
 function App() {
@@ -15,7 +14,6 @@ function App() {
   }
 
   function myCustomCommand() {
-    const invoke = window.__TAURI__.core.invoke;
     invoke("my_custom_command");
   }
 
